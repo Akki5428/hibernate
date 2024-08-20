@@ -20,9 +20,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/loginuser")
-	public String postMethodName(UserEntity entity) {
-		System.out.println(entity.getEmail());
-		userrepo.save(null);
+	public String postMethodName(UserEntity user) {
+		System.out.println(user.getEmail());
+		userrepo.save(user);
 		
 		return "NewUser";
 	}
