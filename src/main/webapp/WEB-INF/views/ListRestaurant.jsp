@@ -28,7 +28,7 @@
 				out.print("<td>"+r.getName()+"</td>");	
 				out.print("<td>"+r.getAddress()+"</td>");	
 				out.print("<td>"+r.getCategory()+"</td>");	
-				out.print("<td><a href='deleterestro?rid="+r.getRestaurantId()+"'>Delete</a></td>");
+				out.print("<td><a href='deleterestro?rid="+r.getRestaurantId()+"'>Delete</a> | <a href='editrestro?rid="+r.getRestaurantId()+"'>Edit </a></td>");
 				out.print("</tr>");
 			}
 		%>

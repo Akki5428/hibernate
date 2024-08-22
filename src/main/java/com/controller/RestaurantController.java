@@ -1,10 +1,13 @@
 package com.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -28,9 +31,40 @@ public class RestaurantController {
 	}
 	
 	@PostMapping("/saverestro")
-	public String saverestro(RestaurantEntity restroentity) {
-		restrorepo.save(restroentity);
-		return "Success";
+	public String saverestro(@Validated RestaurantEntity restroentity,BindingResult result,Model model) {
+		
+		if(result.hasErrors()){
+			System.out.println(result.getAllErrors());
+			
+			String errorName = null;
+			String errorAdd = null;
+			String errorCat = null;
+			
+	        if (result.getFieldError("name") != null) {
+	            errorName = result.getFieldError("name").getDefaultMessage();
+	        }
+	        
+	        if (result.getFieldError("address") != null) {
+	            errorAdd = result.getFieldError("address").getDefaultMessage();
+	        }
+	        
+	        if (result.getFieldError("category") != null) {
+	            errorCat = result.getFieldError("category").getDefaultMessage();
+	        }
+			
+	        	model.addAttribute("errorName",errorName);
+				model.addAttribute("errorAdd",errorAdd);
+				model.addAttribute("errorCat",errorCat);
+			return "NewResturant";
+		}
+		else
+		{
+			restrorepo.save(restroentity);
+			return "Success";
+		}
+		
+		
+		
 	}
 	
 	
@@ -51,6 +85,35 @@ public class RestaurantController {
 		
 		return "redirect:/listrestro";
 	}
+	
+	@GetMapping("/editrestro")
+	public String editrestro(@RequestParam int rid,Model model) 
+	{
+		
+		System.out.println(rid);
+		Optional<RestaurantEntity> restro = restrorepo.findById(rid);
+		
+		if(restro.isEmpty())
+		{
+			return "Error";
+		}
+		
+		else
+		{
+			model.addAttribute("restro",restro.get());
+			return "EditResaurant";
+		}
+		
+		
+	}
+	
+	@PostMapping("/editedrestro")
+	public String editedrestro(RestaurantEntity restroentity) {
+		restrorepo.save(restroentity);
+		return "redirect:/listrestro";
+	}
+	
+	
 	
 	
 	

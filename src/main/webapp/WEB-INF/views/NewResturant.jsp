@@ -8,9 +8,9 @@
 </head>
 <body>
 	<form action="saverestro" method="post">
-		Name : <input type="text" name="name" /><br><br>
-		Address : <input type="text" name="address"/><br><br>
-		Category : <input type="text" name="category"/><br><br>
+		Name : <input type="text" name="name" /> <span style="color:red;">${errorName}</span><br><br>
+		Address : <input type="text" name="address"/> <span style="color:red;">${errorAdd}</span><br><br>
+		Category : <input type="text" name="category"/> <span style="color:red;">${errorCat}</span><br><br>
 		
 		<input type="submit" value="Add Restaurant">
 	</form>
