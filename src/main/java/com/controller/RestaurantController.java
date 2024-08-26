@@ -35,26 +35,8 @@ public class RestaurantController {
 		
 		if(result.hasErrors()){
 			System.out.println(result.getAllErrors());
-			
-			String errorName = null;
-			String errorAdd = null;
-			String errorCat = null;
-			
-	        if (result.getFieldError("name") != null) {
-	            errorName = result.getFieldError("name").getDefaultMessage();
-	        }
-	        
-	        if (result.getFieldError("address") != null) {
-	            errorAdd = result.getFieldError("address").getDefaultMessage();
-	        }
-	        
-	        if (result.getFieldError("category") != null) {
-	            errorCat = result.getFieldError("category").getDefaultMessage();
-	        }
-			
-	        	model.addAttribute("errorName",errorName);
-				model.addAttribute("errorAdd",errorAdd);
-				model.addAttribute("errorCat",errorCat);
+			model.addAttribute("restro",restroentity);
+			model.addAttribute("result",result);
 			return "NewResturant";
 		}
 		else

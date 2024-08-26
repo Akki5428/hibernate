@@ -8,9 +8,9 @@
 </head>
 <body>
 	<form action="saverestro" method="post">
-		Name : <input type="text" name="name" /> <span style="color:red;">${errorName}</span><br><br>
-		Address : <input type="text" name="address"/> <span style="color:red;">${errorAdd}</span><br><br>
-		Category : <input type="text" name="category"/> <span style="color:red;">${errorCat}</span><br><br>
+		Name : <input type="text" name="name" value="${restro.name}"/> <span style="color:red;">${result.getFieldError("name").getDefaultMessage()}</span><br><br>
+		Address : <input type="text" name="address" value="${restro.address}"/> <span style="color:red;">${result.getFieldError("address").getDefaultMessage()}</span><br><br>
+		Category : <input type="text" name="category" value="${restro.category}"/> <span style="color:red;">${result.getFieldError("category").getDefaultMessage()}</span><br><br>
 		
 		<input type="submit" value="Add Restaurant">
 	</form>
